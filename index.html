@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game2</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+
+
+
+    <!-- login form -->
+
+    <form id="form" action="">
+
+        <label for="name">Enter 1st Player's Name</label>
+        <input type="text" name="name" id="name">
+        <label for="name2">Enter 2nd Player's Name</label>
+        <input type="text" name="name2" id="name2">
+        <button id="log" type="submit">Login</button>
+    </form>
+    <!-- login form -->
+
+    
+    <main id="main_content">
+        <h1>LETS PLAY</h1>
+        <div id="game">
+            <div id="player1">
+                <h2 id="p1">PLAYER1</h2>
+                <img src="./Rock-Paper-Scissors(stone).jpg" alt="" id="stone1">
+                <img src="./Rock-Paper-Scissors(paper).jpg" alt="" id="paper1">
+                <img src="./Rock-Paper-Scissors(scissors).jpg" alt="" id="scissor1">
+            </div>
+
+            <button id="btn">START</button>
+            <div id="box">
+                <button id="again">Play Again</button>
+                <p id="ans"></p>
+            </div>
+
+            <div id="player2">
+                <h2 id="p2">PLAYER2</h2>
+                <img src="./Rock-Paper-Scissors(stone1).jpg" alt="" id="stone2">
+                <img src="./Rock-Paper-Scissors(paper1).jpg" alt="" id="paper2">
+                <img src="./Rock-Paper-Scissors(scissors1).jpg" alt="" id="scissor2">
+            </div>
+        </div>
+
+
+        <h4 style="text-align: center;">© 2023 Flavor. All rights reserved By <span style="font-family: Cooper; color: brown;">"SHAGUN
+                CHAUHAN"</span></h4>
+        <button type="submit" id="logout" style="margin: 0 auto;">Logout</button>
+
+    </main>
+
+
+    <script>
+
+        var player1 = document.getElementById("player1")
+        var player2 = document.getElementById("player2")
+        var btn = document.getElementById("btn")
+        var stone1 = document.getElementById("stone1")
+        var stone2 = document.getElementById("stone2")
+        var paper1 = document.getElementById("paper1")
+        var paper2 = document.getElementById("paper2")
+        var scissor1 = document.getElementById("scissor1")
+        var scissor2 = document.getElementById("scissor2")
+        var ans = document.getElementById("ans")
+        var again = document.getElementById("again")
+        var main_content = document.getElementById("main_content")
+        again.style.display = "none"
+
+        let num1 = Math.floor(Math.random() * 3) + 1;
+        let num2 = Math.floor(Math.random() * 3) + 1;
+        ans.style.display = "none"
+
+
+        btn.addEventListener("click", () => {
+            var interval = setInterval(rotateChoices, 1000);
+            function rotateChoices() {
+
+
+                // Hide all images initially
+                stone1.style.display = "none";
+                paper1.style.display = "none";
+                scissor1.style.display = "none";
+                stone2.style.display = "none";
+                paper2.style.display = "none";
+                scissor2.style.display = "none";
+                
+
+                // Show the selected image for player 1
+                if (num1 === 1) {
+                    stone1.style.display = "block";
+                } else if (num1 === 2) {
+                    paper1.style.display = "block";
+                } else if (num1 === 3) {
+                    scissor1.style.display = "block";
+                }
+
+                // Show the selected image for player 2
+                if (num2 === 1) {
+                    stone2.style.display = "block";
+                } else if (num2 === 2) {
+                    paper2.style.display = "block";
+                } else if (num2 === 3) {
+                    scissor2.style.display = "block";
+                }
+
+
+
+            }
+            again.addEventListener("click", () => {
+                btn.style.display = "block"
+                again.style.display = "none"
+                location.reload()
+            })
+
+            setTimeout(() => {
+                clearInterval(interval);
+                compareChoices();
+            }, 4000);
+
+
+
+            function compareChoices() {
+
+
+                if (num1 == 1 && num2 == 1) {
+                    ans.innerHTML = "Match tie"
+                }
+                else if (num1 == 2 && num2 == 2) {
+                    ans.innerHTML = "Match tie"
+                }
+                else if (num1 == 3 && num2 == 3) {
+                    ans.innerHTML = "Match tie"
+                }
+                else if (num1 == 1 && num2 == 3)
+                    ans.innerHTML =  `${storedName}<br>wins`
+                else if (num1 == 1 && num2 == 2)
+                    ans.innerHTML = `${storedName2}<br>wins`
+                else if (num1 == 2 && num2 == 1)
+                    ans.innerHTML =  `${storedName}<br>wins`
+                else if (num1 == 2 && num2 == 3)
+                    ans.innerHTML = `${storedName2}<br>wins`
+                else if (num1 == 3 && num2 == 1)
+                    ans.innerHTML = `${storedName2}<br>wins`
+                else if (num1 == 3 && num2 == 2)
+                    ans.innerHTML =  `${storedName }<br>wins`
+                ans.style.display = "block"
+                btn.style.display = "none"
+                again.style.display = "block"
+                box.style.display = "block"
+            }
+
+
+            stone1.classList.add("cng1")
+            paper1.classList.add("cng1")
+            scissor1.classList.add("cng1")
+
+            stone2.classList.add("cng1")
+            paper2.classList.add("cng1")
+            scissor2.classList.add("cng1")
+
+          
+
+
+        });
+
+
+        // // login ki js
+        var form = document.getElementById("form")
+        var user = document.getElementById("user")
+        var name1 = document.getElementById("name")
+        var name2 = document.getElementById("name2")
+        var log = document.getElementById("log")
+        var logout = document.getElementById("logout")
+        var main_content = document.getElementById("main_content")
+        var head = document.getElementById("head")
+        logout.style.display = "none"
+        let storedName = localStorage.name;
+        let storedName2 = localStorage.name2;
+        let p1 = document.getElementById("p1")
+        let p2 = document.getElementById("p2")
+        if (storedName) {
+            form.style.display = "none"
+            logout.style.display = "block"
+            main_content.style.display = "block"
+            p1.innerHTML = `${storedName}`
+            p2.innerHTML = `${storedName2}`
+
+        }
+       
+        else {
+        }
+
+        logout.addEventListener("click", () => {
+            localStorage.clear();
+            location.reload();
+            confirm("Are you sure You want to logout")
+        })
+        log.addEventListener("click", () => {
+
+
+            var UserName = name1.value;
+            var UserName2 = name2.value;
+            if (name1.value === "" || name2.value === "") {
+                alert("Please enter the details")
+
+
+            }
+            else {
+                localStorage.setItem("name", UserName)
+                localStorage.setItem("name2", UserName2)
+                name2.value = "";
+                name.value = "";
+                location.reload;
+                main_content.style.display = "block"
+
+
+            }
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
